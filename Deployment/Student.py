@@ -18,7 +18,7 @@ import os
 #     return model, scaler
 
 def load_model():
-    with  open("student_lr_final_model.pkl",'rb') as file:
+    with  open("student_performance_model.pkl",'rb') as file:
         model,scaler,le=pickle.load(file)
     return model,scaler,le
 
