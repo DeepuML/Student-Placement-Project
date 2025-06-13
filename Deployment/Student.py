@@ -7,18 +7,16 @@ import shap
 import lime
 import lime.lime_tabular
 import matplotlib.pyplot as plt
-from io import BytesIO
+import os
 
 # Load model and scaler
 def load_model():
-    # Get the path of the current script (Deployment/Student.py)
-    model_path = os.path.join(os.path.dirname(__file__), 'student_performance_model.pkl')
-    
-    # Load the model and scaler from the relative path
+    # Construct path to the model file located in ../code/
+    model_path = os.path.join(os.path.dirname(__file__), '..', 'code', 'student_performance_model.pkl')
+    model_path = os.path.abspath(model_path)  # Convert to absolute path
     with open(model_path, 'rb') as file:
         model, scaler = pickle.load(file)[:2]
-    
-    return model, scale
+    return model, scaler
 
 # Preprocess input for single prediction
 def preprocess_input(data_dict, scaler):
@@ -39,7 +37,7 @@ def preprocess_batch(df, scaler):
 def predict(model, X):
     return model.predict(X)
 
-# SHAP
+# SHAP Explanation
 def shap_explain(model, X_scaled):
     explainer = shap.Explainer(model.predict, X_scaled)
     shap_values = explainer(X_scaled)
@@ -48,7 +46,7 @@ def shap_explain(model, X_scaled):
     shap.plots.waterfall(shap_values[0], max_display=5, show=False)
     st.pyplot(fig)
 
-# LIME
+# LIME Explanation
 def lime_explain(model, X_scaled, df_original):
     explainer = lime.lime_tabular.LimeTabularExplainer(
         training_data=np.array(df_original),
@@ -66,9 +64,8 @@ def convert_df_to_csv(df):
 # Prediction Visualization
 def visualize_predictions(df):
     st.subheader("📊 Prediction Distribution")
-
     st.bar_chart(df[["Predicted Performance"]])
-    
+
     fig, ax = plt.subplots()
     ax.hist(df["Predicted Performance"], bins=10, color="skyblue", edgecolor="black")
     ax.set_xlabel("Performance Score")
