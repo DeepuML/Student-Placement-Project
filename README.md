@@ -49,7 +49,9 @@ ML/
 ## ⚙️ How to Run Locally
 
 1. Clone this repo:
+
    git clone https://github.com/DeepuML/Student-Placement-Project.git
+   
    cd Student-Placement-Project
 
 🧑‍💻 Author : Deependra Gangwar
