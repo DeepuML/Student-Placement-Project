@@ -10,13 +10,18 @@ import matplotlib.pyplot as plt
 import os
 
 # Load model and scaler
+
+# def load_model():
+#     model_path = os.path.join(os.path.dirname(__file__), 'student_performance_model.pkl')
+#     with open(model_path, 'rb') as file:
+#         model, scaler = pickle.load(file)[:2]
+#     return model, scaler
+
 def load_model():
-    # Construct path to the model file located in ../code/
-    model_path = os.path.join(os.path.dirname(__file__), '..', 'code', 'student_performance_model.pkl')
-    model_path = os.path.abspath(model_path)  # Convert to absolute path
-    with open(model_path, 'rb') as file:
-        model, scaler = pickle.load(file)[:2]
-    return model, scaler
+    with  open("student_lr_final_model.pkl",'rb') as file:
+        model,scaler,le=pickle.load(file)
+    return model,scaler,le
+
 
 # Preprocess input for single prediction
 def preprocess_input(data_dict, scaler):
