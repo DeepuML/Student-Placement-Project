@@ -52,9 +52,8 @@ ML/
    git clone https://github.com/DeepuML/Student-Placement-Project.git
    cd Student-Placement-Project
 
-🧑‍💻 Author
-Deependra Gangwar
-👨‍💻 GitHub
-📫 deependra746768@gmail.com   
+🧑‍💻 Author : Deependra Gangwar
+
+📫 Email : deependra746768@gmail.com   
 
 
