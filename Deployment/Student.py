@@ -10,9 +10,14 @@ from io import BytesIO
 
 # Load model and scaler
 def load_model():
-    with open('D:/Euron/ML/class1/code/student_performance_model.pkl', 'rb') as file:
+    # Get the path of the current script (Deployment/Student.py)
+    model_path = os.path.join(os.path.dirname(__file__), 'student_performance_model.pkl')
+    
+    # Load the model and scaler from the relative path
+    with open(model_path, 'rb') as file:
         model, scaler = pickle.load(file)[:2]
-    return model, scaler
+    
+    return model, scale
 
 # Preprocess input for single prediction
 def preprocess_input(data_dict, scaler):
